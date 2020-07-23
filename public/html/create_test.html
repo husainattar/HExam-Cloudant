@@ -1,0 +1,228 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Balsamiq Sans';
+        }
+
+        .decorate {
+            background-color: hsla(0, 0%, 100%, 0.8);
+            margin-top: 1%;
+        }
+
+        #custom {
+            margin-top: 5%;
+
+        }
+
+        #customh1 {
+            padding-top: 5%;
+        }
+
+        h1 {
+            padding-top: 1%;
+        }
+
+        .btn-info {
+            background-color: #5D432C;
+            margin-bottom: 1%;
+        }
+
+        .btn-info:hover {
+            background-color: black;
+        }
+
+        .form-decorate {
+            padding-left: 10%;
+        }
+
+        table {
+            margin-top: 1%;
+        }
+
+        .navbar-header {
+            width: 100%;
+        }
+
+        .right-side-button {
+            float: right;
+        }
+    </style>
+</head>
+
+<body onload="loadStudents()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="/api/teacher/home">Hexam</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container decorate">
+        <h1>Create Test</h1>
+
+        <form action="/api/test" method="POST">
+
+            <div class="form-group">
+                <label for="tname">Test Title</label>
+                <input type="text" class="form-control" name="title" id="tname" placeholder="Enter Test Title">
+            </div>
+
+            <div class="form-group">
+                <label for="tdesc">Test Description</label>
+                <input type="textarea" class="form-control" name="description" id="tdesc"
+                    placeholder="Enter Test Description">
+            </div>
+
+            <div class="form-group">
+                <label for="tdate">Test Date</label>
+                <input type="date" class="form-control" name="date" id="tdate" placeholder="Enter Test date">
+            </div>
+
+            <div class="form-group">
+                <label for="tdur">Test Duration</label>
+                <input type="number" class="form-control" name="duration" id="tdur"
+                    placeholder="Enter test duration in minutes">
+            </div>
+
+            <div class="form-group">
+                <label for="tstart">Test Start Time</label>
+                <input type="time" class="form-control" name="start" id="tstart" placeholder="Enter test start time">
+            </div>
+
+            <div class="form-group">
+                <label for="tend">Test End Time</label>
+                <input type="time" class="form-control" name="end" id="tend" placeholder="Enter test end time">
+            </div>
+
+            <label>Select Students</label>
+            <div style="overflow: auto; height:150px;" id="studentsSection"></div>
+
+            <br>
+            <br>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+
+        // function checkAll(ele) {
+        //     var checkboxes = document.getElementsByName('students');
+        //     if (ele.checked) {
+        //         for (var i = 0; i < checkboxes.length; i++) {
+        //             if (checkboxes[i].type == 'checkbox') {
+        //                 checkboxes[i].checked = true;
+        //             }
+        //         }
+        //     } else {
+        //         for (var i = 0; i < sc checkboxes.length; i++) {
+        //             console.log(i)
+        //             if (checkboxes[i].type == 'checkbox') {
+        //                 checkboxes[i].checked = false;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // var count = 0;
+        // function createFields() {
+
+        //     var number = document.getElementById("questionType").value;
+        //     // Container <div> where dynamic content will be placed
+        //     var container = document.getElementById("questionList");
+
+        //     var qtype = document.createElement("input");
+        //     qtype.id = "question_type_" + count;
+        //     qtype.type = "hidden";
+        //     qtype.value = number;
+        //     qtype.name = "question_type_" + count;
+        //     container.appendChild(qtype);
+
+        //     container.appendChild(document.createTextNode("Question:"));
+        //     // Create an <input> element, set its type and name attributes
+        //     var que = document.createElement("input");
+        //     que.id = "question_" + count;
+        //     que.type = "text";
+        //     que.name = "question_" + count;
+        //     que.style = "padding-right:15px;";
+        //     container.appendChild(que);
+
+        //     var input = "";
+        //     if (number == "0") {
+        //         container.appendChild(document.createElement("br"));
+        //         container.appendChild(document.createElement("br"));
+        //         for (i = 0; i < 4; i++) {
+        //             container.appendChild(document.createTextNode("Options:"));
+        //             input = document.createElement("input");
+        //             input.id = "option_" + count + "_" + i;
+        //             input.type = "text";
+        //             input.name = "option_" + count + "_" + i;
+        //             container.appendChild(input);
+        //         }
+        //     }
+        //     else {
+        //         container.appendChild(document.createTextNode("Answer:"));
+        //         input = document.createElement("input");
+        //         input.id = "textarea_" + count;
+        //         input.type = "text";
+        //         input.name = "textarea_" + count;
+        //         container.appendChild(input);
+        //     }
+
+        //     container.appendChild(document.createElement("br"));
+        //     container.appendChild(document.createElement("br"));
+        //     count++;
+        //     document.getElementById("no").setAttribute("value", count);
+        // }
+        
+        const loadStudents = async () => {
+            // const url="https://hexam.eu-gb.mybluemix.net/";
+            const url="http://localhost:3000/"
+            const res = await fetch(url+'api/student/all')
+            console.log(res)
+            // console.log(typeof res);
+            const data = await res.json();
+            console.log(data)
+            let s = `<div class="form-check">
+                    <label><input type="checkbox" class="form-check-input" onchange="checkAll(this)"
+                            name="students">Select All</label></div>`
+
+            for (i = 0; i < data.length; i++) {
+                s += `<div class="form-check">
+                        <label>
+                            <input type="checkbox" class="form-check-input" value="${data[i].email}" name="students">
+                                ${data[i].name}  ( ${data[i].email} )
+                        </label>
+                    </div>`
+            }
+            console.log(s)
+            document.querySelector('#studentsSection').innerHTML = s;
+        }
+
+    </script>
+</body>
+
+</html>

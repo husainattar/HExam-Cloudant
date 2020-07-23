@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Balsamiq Sans';
+        }
+
+        .decorate {
+            background-color: hsla(0, 0%, 100%, 0.8);
+            margin-top: 1%;
+        }
+
+        #custom {
+            margin-top: 5%;
+
+        }
+
+        #customh1 {
+            padding-top: 5%;
+        }
+
+        h1 {
+            padding-top: 1%;
+        }
+
+        .btn-info {
+            color: aliceblue;
+            padding: 10px;
+            background-color: #5D432C;
+            margin-bottom: 1%;
+        }
+
+        .btn-info:hover {
+            background-color: black;
+        }
+
+        .form-decorate {
+            padding-left: 10%;
+        }
+
+        table {
+            margin-top: 1%;
+        }
+
+        .navbar-header {
+            width: 100%;
+        }
+
+        .right-side-button {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container decorate" id="custom" align="center">
+        <h1  id="customh1">Hexam - A platform to conduct fair tests</h1>
+        <div class="row">
+            <div class="col-lg-6">
+                <form action="/api/teacher/login" class="form-decorate" method="POST">
+                    <div class="form-group row">
+                        <label for="email">Email Id</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Enter your Email Id">
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pass">Password</label>
+                        <input type="password" class="form-control" name="pass" id="pass"
+                            placeholder="Enter your Password">
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="submit" class="btn-info" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

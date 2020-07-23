@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Balsamiq Sans';
+        }
+
+        .decorate {
+            background-color: hsla(0, 0%, 100%, 0.8);
+            margin-top: 1%;
+        }
+
+        #custom {
+            margin-top: 5%;
+
+        }
+
+        #customh1 {
+            padding-top: 5%;
+        }
+
+        h1 {
+            padding-top: 1%;
+        }
+
+        .btn-info {
+            background-color: #5D432C;
+            margin-bottom: 1%;
+            margin-top: 4%;
+        }
+
+        .btn-info:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container decorate">
+        <h1>Create Student</h1>
+
+        <form action="/api/student" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="tname">Name</label>
+                <input type="text" class="form-control" name="name" id="tname" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label for="tdesc">Email</label>
+                <input type="email" class="form-control" name="email" id="tdesc" placeholder="Enter Email">
+            </div>
+            <input type="file" name="image" accept="image/*" />
+            <div class="form-group">
+                <input type="submit" class="btn btn-info" />
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
