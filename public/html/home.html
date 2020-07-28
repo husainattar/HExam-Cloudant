@@ -123,6 +123,7 @@
                             <th>Face Suspicion</th>
                             <th>Eye Suspicion</th>
                             <th>Cheating Probability</th>
+                            <th>Plagiarism</th>
                         </tr>
                     </thead>
                     <tbody id="resultsSection">
@@ -196,7 +197,7 @@
                     let level=probability==1?"Low":probability==2?"Medium":probability==3?"High":"Very High"
 
                     console.log(level)
-                    child.innerHTML = "<td>" + data.student_email + "</td>" + "<td>" + data.tab_switches + "</td>" + "<td>" +  data.face_suspicion + "</td>" + "<td>" + data.eye_suspicion+ "</td>"+ "<td>" + level + "</td>"
+                    child.innerHTML = "<td>" + data.student_email + "</td>" + "<td>" + data.tab_switches + "</td>" + "<td>" +  data.face_suspicion + "</td>" + "<td>" + data.eye_suspicion+ "</td>"+ "<td>" + level + "</td>"+ "<td>" + data.test_content + "</td>"
                     document.querySelector('#resultsSection').appendChild(child)
                 }
             }
