@@ -5,7 +5,7 @@
     , async = require('async');
 
 module.exports = {
-    create: async ({ title, description, duration, start, end, date, students }) => {
+    create: async ({ title, description, duration, start, end, date, students, test_content }) => {
         return new Promise(async (resolve, reject) => {
             const testId = uuid.v4();
             // connection.beginTransaction((err) => {
@@ -39,7 +39,7 @@ module.exports = {
             let list={
                 _id:testId, type:"test",title:title, description:description, 
                 duration:duration, 
-                start:start, end:end, date:date
+                start:start, end:end, date:date, test_content: test_content
             }
 
 
