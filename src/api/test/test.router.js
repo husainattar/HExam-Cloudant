@@ -21,7 +21,7 @@ testRouter
             if(!Array.isArray(req.body.students))
                 req.body.students=[req.body.students]                
 
-            const result = await testController.create({ title: req.body.title, description: req.body.description, duration: req.body.duration, start: req.body.start, end: req.body.end, date: req.body.date, students: req.body.students })
+            const result = await testController.create({ title: req.body.title, description: req.body.description, duration: req.body.duration, start: req.body.start, end: req.body.end, date: req.body.date, students: req.body.students, test_content : req.body.test_content })
             res.redirect('/api/teacher/home')
         } catch (error) {
             res.sendStatus(404)
