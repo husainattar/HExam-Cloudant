@@ -1,1 +1,1 @@
-# HEExam-Cloudant
+# HExam-Cloudant
