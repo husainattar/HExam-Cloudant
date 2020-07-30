@@ -113,7 +113,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
 
-            // const url="https://hexam.eu-gb.mybluemix.net/";?
+            // const url="https://hexam.eu-gb.mybluemix.net/";
             const url="http://localhost:3000/"
             // connection.execute('INSERT INTO students VALUES(?,?,?)', [email, name, url+"uploads/"+filename ], (err, result) => {
             //     if (err){
