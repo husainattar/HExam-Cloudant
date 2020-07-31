@@ -64,11 +64,12 @@ studentRouter
     .put('/report/:testid', async (req, res) => {
         console.log(req.body)
         try {
-            const result = await studentController.updateReport({ faceSuspicion: req.body.faceSuspicion, 
-                eyeSuspicion: req.body.eyeSuspicion, tabSwitches: req.body.tabSwitches, 
-                email: req.body.studentEmail, testId: req.params.testid })
+
+            const result = await studentController.updateReport({ faceSuspicion: req.body.faceSuspicion, eyeSuspicion: req.body.eyeSuspicion, tabSwitches: req.body.tabSwitches,test_content: JSON.parse(req.body.test_content), email: req.body.studentEmail, testId: req.params.testid })
+
             res.json(result)
         } catch (error) {
+            console.log(error)
             res.sendStatus(404)
         }
     })  
