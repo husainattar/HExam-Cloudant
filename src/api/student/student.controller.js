@@ -201,6 +201,11 @@ module.exports = {
             });
         })
     },
+    getPlagiarism : async({email, test_id }) =>{
+
+    	//write code to fetch the plagiarism report of student from his/her email and the the test id
+
+    },
     fetch : async ({ email }) => {
         return new Promise((resolve, reject) => {
             // connection.execute('SELECT * FROM students WHERE email = ?', [email], (err, rows, fields) => {
