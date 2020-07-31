@@ -17,10 +17,13 @@ function pythonFunction (value){
     python.stdout.on('data', function (data) {
         console.log('Pipe data from python script ...');
         report = data.toString();
+        report = report.split(" ");
         console.log(report);
         console.log(value);
-        let url =report.substring(report.indexOf("u")+1,report.indexOf(")")).replace("'",'');
-        let percent=report.substring(1,report.indexOf(","));
+        // let url =report.substring(report.indexOf("u")+1,report.indexOf(")")).replace("'",'');
+        // let percent=report.substring(1,report.indexOf(","));
+        let url = report[0];
+        let percent = report[1];
         var plagiarismReport={
             "percentageCopied":percent,
             "urlUsed":url
