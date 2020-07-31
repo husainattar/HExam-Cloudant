@@ -97,11 +97,10 @@ module.exports = {
             //     else
             //         resolve(rows[0])
             // })
-
             db.find({
                 'selector': {
                     'type': "test",
-                    'test_id': id
+                    '_id': id
                 }
             }, (err, documents) => {
                 if (err) {

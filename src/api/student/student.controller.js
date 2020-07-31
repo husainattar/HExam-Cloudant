@@ -1,7 +1,50 @@
 "use strict"
+const {spawn} = require('child_process');
 // const connection = require('../../config/db');
 const db=require('../../config/cloudantdb');
 const { uuid } = require('uuidv4');
+
+//Function-For-PythonCalling
+
+function pythonFunction (value){
+    //Here-python-worked-for-me-instead-of-python3
+  return new Promise((resolve,reject)=>{
+
+    const python = spawn('python', ['./web_plagiarism_check.py',value]);
+    // collect data from script
+    console.log("In-function-report");
+    var report;
+    python.stdout.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        report = data.toString();
+        console.log(report);
+        console.log(value);
+        let url =report.substring(report.indexOf("u")+1,report.indexOf(")")).replace("'",'');
+        let percent=report.substring(1,report.indexOf(","));
+        var plagiarismReport={
+            "percentageCopied":percent,
+            "urlUsed":url
+        }
+        resolve(plagiarismReport)
+    });
+    
+    // in close event we are sure that stream from child process is closed
+   
+  })
+
+}
+
+let getPlagReport = async(content) => {
+            var list=[]
+            for(var item of content){
+                if(item.isSubjective){
+                    var getValue = await pythonFunction(item.answer);
+                    list.push(getValue)
+                }
+            }
+            return(list);
+}
+
 
 module.exports = {
     getAll: async () => {
@@ -63,7 +106,7 @@ module.exports = {
             });
         })
     },
-    updateReport: async ({ faceSuspicion, eyeSuspicion, tabSwitches, email, testId }) => {
+    updateReport: async ({ faceSuspicion, eyeSuspicion, tabSwitches,test_content, email, testId }) => {
         return new Promise((resolve, reject) => {
             console.log("updating",faceSuspicion,eyeSuspicion)
             // connection.execute('UPDATE reports SET face_suspicion = ?, eye_suspicion = ?, tab_switches = ? WHERE student_email = ? AND test_id = ?', [faceSuspicion, eyeSuspicion, tabSwitches, email, testId], (err, result) => {
@@ -93,16 +136,26 @@ module.exports = {
                                 list.eye_suspicion=eyeSuspicion;
                                 list.tab_switches=tabSwitches;
 
-                                db.insert(list, (err, result) => {
-                                    if (err) {
-                                        logger.error('Error occurred: ' + err.message, 'create()');
-                                        reject(err);
-                                    } else {
-                                        resolve({ data: { createdId: result.id, createdRevId: result.rev }, statusCode: 201 });
-                                        console.log(result);
-                                    }
-                                });
-                              
+                                list.plagiarism_report=[];
+
+                                // Calling the python function for the Each Subjective-Answer
+                                getPlagReport(test_content).then((plaglist)=>{
+                                    list.plagiarism_report=plaglist;
+
+                                    db.insert(list, (err, result) => {
+                                        if (err) {
+                                            logger.error('Error occurred: ' + err.message, 'create()');
+                                            reject(err);
+                                        } else {
+                                            resolve({ data: { createdId: result.id, createdRevId: result.rev }, statusCode: 201 });
+                                            console.log(result);
+                                        }
+                                    });
+
+
+                                }).catch();
+
+
                             }
                  });
 
@@ -145,6 +198,11 @@ module.exports = {
             });
         })
     },
+    getPlagiarism : async({email, test_id }) =>{
+
+    	//write code to fetch the plagiarism report of student from his/her email and the the test id
+
+    },
     fetch : async ({ email }) => {
         return new Promise((resolve, reject) => {
             // connection.execute('SELECT * FROM students WHERE email = ?', [email], (err, rows, fields) => {
@@ -178,50 +236,3 @@ module.exports = {
         })
     }
 }
-
-
-
-////Used-to-create-Put-request
-
-// let updateReport = (faceSuspicion, eyeSuspicion, tabSwitches, email, testId)=>{
-//     return new Promise((resolve, reject) => {
-//         db.find({
-//             'selector': {
-//                 'type':"report",
-//                 'test_id':testId,
-//                 'student_email':email
-//                   }
-//                     }, (err, documents) => {
-//                         if (err) {
-//                             reject(err);
-//                         } else if(documents.docs.length === 0){
-//                             reject(err);
-//                         }
-//                         else {
-        
-//                             // resolve({ data: JSON.stringify(documents.docs), statusCode: (documents.docs.length > 0) ? 200 : 404 });
-//                             let list=documents.docs[0];
-        
-//                             list.face_suspicion=faceSuspicion;
-//                             list.eye_suspicion=eyeSuspicion;
-//                             list.tab_switches=tabSwitches;
-        
-//                             db.insert(list, (err, result) => {
-//                                 if (err) {
-//                                     logger.error('Error occurred: ' + err.message, 'create()');
-//                                     reject(err);
-//                                 } else {
-//                                     resolve({ data: { createdId: result.id, createdRevId: result.rev }, statusCode: 201 });
-//                                     console.log(result);
-//                                 }
-//                             });
-                          
-//                         }
-//              });
-//     })
-   
-// }
-
-// updateReport(10,20,20,'h@gmail.com','afb2120a-95b7-46d3-a343-9db08a9005d3').then((status)=>{
-//     console.log(status);
-// }).catch()
