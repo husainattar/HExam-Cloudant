@@ -1,5 +1,6 @@
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
+
 try:
     from googlesearch import search
 except ImportError:
@@ -14,6 +15,9 @@ import sys
 query =sys.argv[1]
 query=query.split()
 query = " ".join(query[:32])
+
+# query="A thread is a lightweighted task"
+
 # Storing the resulted urls to web scrap with.
 resulted_urls = []
 
