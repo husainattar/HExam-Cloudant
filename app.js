@@ -12,7 +12,7 @@ const cors = require('cors')
 dotenv.config()
 
 const app = express()
-// app.use(cors())
+app.use(cors())
 
 
 app.use(bodyParser.urlencoded({ extended: true }))

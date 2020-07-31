@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+
     <style>
         body {
             background-image: url("https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
@@ -20,8 +25,10 @@
         }
 
         .decorate {
-            background-color: hsla(0, 0%, 100%, 0.8);
+            background-color: hsla(0, 0%, 100%, 0.9);
             margin-top: 1%;
+            padding-left:0%;
+            padding-bottom: 1%;
         }
 
         #custom {
@@ -35,23 +42,11 @@
 
         h1 {
             padding-top: 1%;
-        }
-
-        .btn-info {
-            background-color: #5D432C;
-            margin-bottom: 1%;
-        }
-
-        .btn-info:hover {
-            background-color: black;
+            padding-left: 1%;
         }
 
         .form-decorate {
             padding-left: 10%;
-        }
-
-        table {
-            margin-top: 1%;
         }
 
         .navbar-header {
@@ -61,6 +56,11 @@
         .right-side-button {
             float: right;
         }
+
+        .nav-item:hover{
+            background-color: #4db6ac;
+        }
+
     </style>
 </head>
 
@@ -79,49 +79,57 @@
     </nav>
 
     <div class="container decorate">
-        <h1>Create Test</h1>
+        <h1 class="teal">Create Test</h1>
+        <form action="/api/test" method="POST" class="col-lg-12">
+            <div class="row z-depth-5 ">
+                <div class="col s6">
+                <div class="input-field">
+                    <label for="tname">Test Title</label>
+                    <input type="text" class="form-control" name="title" id="tname">
+                </div>
 
-        <form action="/api/test" method="POST">
+                <div class="input-field">
+                    <label for="tdesc">Test Description</label>
+                    <textarea class="form-control materialize-textarea" name="description" id="tdesc"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="tname">Test Title</label>
-                <input type="text" class="form-control" name="title" id="tname" placeholder="Enter Test Title">
+                <div class="form-group  ">
+                    <label for="tdate">Test Date</label>
+                    <input type="date" class="form-control" name="date" id="tdate">
+                </div>
+                </div>
+
+                <div class="col s6">
+                    <div class="input-field">
+                        <label for="tdur">Test Duration in minutes</label>
+                        <input type="number" class="form-control" name="duration" id="tdur">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tstart">Test Start Time</label>
+                        <input type="time" class="form-control" name="start" id="tstart">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tend">Test End Time</label>
+                        <input type="time" class="form-control" name="end" id="tend">
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="tdesc">Test Description</label>
-                <input type="textarea" class="form-control" name="description" id="tdesc"
-                    placeholder="Enter Test Description">
-            </div>
+            <div class="row">
+                <div class="col s12 z-depth-5">
+                    <label><h6>Select Students</h6></label>
+                    <div style="overflow: auto; height:150px;" id="studentsSection"></div>
 
-            <div class="form-group">
-                <label for="tdate">Test Date</label>
-                <input type="date" class="form-control" name="date" id="tdate" placeholder="Enter Test date">
-            </div>
+                </div>
 
-            <div class="form-group">
-                <label for="tdur">Test Duration</label>
-                <input type="number" class="form-control" name="duration" id="tdur"
-                    placeholder="Enter test duration in minutes">
-            </div>
 
-            <div class="form-group">
-                <label for="tstart">Test Start Time</label>
-                <input type="time" class="form-control" name="start" id="tstart" placeholder="Enter test start time">
-            </div>
-
-            <div class="form-group">
-                <label for="tend">Test End Time</label>
-                <input type="time" class="form-control" name="end" id="tend" placeholder="Enter test end time">
-            </div>
-
-            <label>Select Students</label>
-            <div style="overflow: auto; height:150px;" id="studentsSection"></div>
-
-            <br>
-            <br>
-            <div class="form-group">
-                <input type="submit" class="btn btn-info" />
+                <div class="form-group col s12">
+                    <button class="btn waves-effect waves-light z-depth-3 teal" type="submit" name="action">Create Test
+                        <i class="material-icons left">create</i>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
@@ -223,6 +231,9 @@
         }
 
     </script>
+
+    <!-- materialize css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>
