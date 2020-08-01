@@ -51,7 +51,7 @@
 
     <div class="container decorate z-depth-5">
         <!-- BACK BUTTON to home page plz put required route -->
-        <button href="#" class="btn waves-effect waves-light z-depth-5 teal" action="">Back
+        <button onclick="goBack()" class="btn waves-)effect waves-light z-depth-5 teal" action="">Back
             <i class="material-icons left">arrow_back</i>
         </button>
         
@@ -61,6 +61,9 @@
     </div>
 
     <script>
+        function goBack(){
+            window.history.back();
+        }
         // const url="https://hexam.eu-gb.mybluemix.net/";
         const url="http://localhost:3000/"
         //static for loop
