@@ -65,19 +65,19 @@
         const url="http://localhost:3000/"
         //static for loop
         const loadReport = async () => {
-            //const res = await fetch(url+'api/test/all')
-            //const data = await res.json()
-            //console.log(data.data)
-            //const Actualdata=data.data;
+            const res = await fetch(url+'api/plagiarism/'+window.location.href.split('/')[6])
+            const data = await res.json()
+            console.log(data.data)
+            const Actualdata=data.data;
             let s = `<li class="collection-header teal"><h4>Plagiarism report</h4></li>`
             for (i = 0; i < 10/*Actualdata.length*/; i++) {
                 console.log("Inside-data");
                 s += `<li class="collection-item avatar">
-                <span class="title">/*Question*/Making a chat application ft. Prof. babaso aldar</span>
+                <span class="title">${Actualdata.question}</span>
                 <p>
-                   Source: <a href="https://www.wikipedia.org/">https://www.wikipedia.org/</a>
+                   Source: <a href="https://www.wikipedia.org/">${Actualdata.copiedFrom}</a>
                 </p>
-                <h5 class="secondary-content">54%</h5>
+                <h5 class="secondary-content">${Actualdata.percent}</h5>
               </li>`
             }
             console.log(s)
