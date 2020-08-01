@@ -197,7 +197,8 @@
                     console.log(level)
                     
                     child.innerHTML = "<td>" + data.student_email + "</td>" + "<td>" + data.tab_switches + "</td>" + "<td>" +  data.face_suspicion + "</td>" + "<td>" + data.eye_suspicion+ "</td>"+ "<td>" + level + "</td>"+ 
-                    	"<td><a href=\""+url+"api/student/plagiarism/"+ Actualemails[i]+"?test_id="+data.test_id+"\">View Report</a></td>"
+
+                    	"<td><a href=\""+url+"api/plagiarism/results/"+ Actualemails[i]+"?test_id="+data.test_id+"\">View Report</a></td>"
 
                     document.querySelector('#resultsSection').appendChild(child)
                 }

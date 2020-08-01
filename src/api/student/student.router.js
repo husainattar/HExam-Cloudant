@@ -51,7 +51,10 @@ studentRouter
             res.sendStatus(404)
         }
     })
-    .get('/plagiarism/:email', async (req, res) => {
+    .get ('/plagiarism/results/:email', async (req, res) => {
+        res.sendFile(path.join(__dirname, '../../../public/html/plagiarism.html'))
+    })
+    .get ('/plagiarism/:email', async (req, res) => {
         try {
             const result = await studentController.getPlagiarism({ email: req.params.email, test_id : req.query.test_id })
             console.log(result);
