@@ -132,8 +132,8 @@
     </div>
 
     <script>
-        // const url="https://hexam.eu-gb.mybluemix.net/";
-        const url="http://localhost:3000/"
+        const url="https://hexam.eu-gb.mybluemix.net/";
+        // const url="http://localhost:3000/"
         const loadTests = async () => {
             const res = await fetch(url+'api/test/all')
             const data = await res.json()
@@ -183,6 +183,9 @@
                     console.log(data);
                     let child = document.createElement('tr');
                     let probability=1
+                    data.tab_switches=parseInt(data.tab_switches)
+                    data.eye_suspicion=parseInt(data.eye_suspicion)
+                    data.face_suspicion =parseInt(data.face_suspicion )
                     let other_suspicion=data.eye_suspicion+data.face_suspicion 
                     
                     if((data.tab_switches>=3 && data.tab_switches<10) || (other_suspicion>=10 && other_suspicion<25 ))
