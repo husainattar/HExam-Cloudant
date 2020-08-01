@@ -65,20 +65,40 @@
         const url="http://localhost:3000/"
         //static for loop
         const loadReport = async () => {
-            const res = await fetch(url+'api/plagiarism/'+window.location.href.split('/')[6])
-            const data = await res.json()
-            console.log(data.data)
-            const Actualdata=data.data;
+            console.log(window.location.href.split('/'));
+            const res = await fetch(url+'api/student/plagiarism/'+window.location.href.split('/')[7])
+            const data = await res.json();
+            console.log(data.data);
+            const Actualdata=data.data.plagiarism_report;
+            console.log(Actualdata);
             let s = `<li class="collection-header teal"><h4>Plagiarism report</h4></li>`
-            for (i = 0; i < 10/*Actualdata.length*/; i++) {
+            for (i = 0; i < Actualdata.length; i++) {
                 console.log("Inside-data");
-                s += `<li class="collection-item avatar">
-                <span class="title">${Actualdata.question}</span>
+                try{
+                    let url = Actualdata[i].copiedFrom.toString().replace("'",'');
+                    url=new URL(url);
+                    console.log("in-here")
+                    s += `<li class="collection-item avatar">
+                <span class="title">${Actualdata[i].question}</span>
                 <p>
-                   Source: <a href="https://www.wikipedia.org/">${Actualdata.copiedFrom}</a>
+                   Source: <a href=${url}>${Actualdata[i].copiedFrom}</a>
                 </p>
-                <h5 class="secondary-content">${Actualdata.percent}</h5>
+                <h5 class="secondary-content">${Actualdata[i].percent}</h5>
               </li>`
+
+                }catch(_){
+                    console.log("In-here")
+                    s += `<li class="collection-item avatar">
+                <span class="title">${Actualdata[i].question}</span>
+                <p>
+                   Source: <p><b>${Actualdata[i].copiedFrom}</b></p>
+                </p>
+                <h5 class="secondary-content">${Actualdata[i].percent}</h5>
+              </li>`
+
+                }
+              
+               
             }
             console.log(s)
             document.querySelector('#testsBody').innerHTML = s

@@ -55,9 +55,10 @@ studentRouter
         res.sendFile(path.join(__dirname, '../../../public/html/plagiarism.html'))
     })
     .get ('/plagiarism/:email', async (req, res) => {
+        console.log("In-Plag-route");
         try {
             const result = await studentController.getPlagiarism({ email: req.params.email, test_id : req.query.test_id })
-            console.log(result);
+            console.log(result.data);
             res.json(result)
         } catch (error) {
             console.log(error);

@@ -116,7 +116,7 @@ updateReport(10,20,20,test_content,'h@gmail.com','afb2120a-95b7-46d3-a343-9db08a
     });
 }).catch()
 
-*/
+
 
 
 
@@ -299,7 +299,15 @@ updateReport("h@gmail.com","afb2120a-95b7-46d3-a343-9db08a9005d3").then((list)=>
                             });
 }).catch()
 
+*/
 
 
-
-
+let check = ()=>{
+    return new Promise((resolve,rejet)=>{
+        resolve("Hi-There");
+        console.log("Just-console.log");
+    })
+}
+check().then((status)=>{
+   console.log(status);
+}).catch();

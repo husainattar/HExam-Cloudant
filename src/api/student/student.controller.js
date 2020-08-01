@@ -258,15 +258,19 @@ module.exports = {
             
                                  changelist[0].plagiarism_report=Targetlist[0];
     
-                                 console.log(changelist);
-            
-                                 db.insert(changelist, (err, result) => {
+                                //  console.log(changelist);
+                                  let mainlist=changelist[0];
+                                 db.insert(changelist[0], (err, result) => {
                                     if (err) {
                                         // logger.error('Error occurred: ' + err.message, 'create()');
                                         reject(err);
                                     } else {
-                                        resolve({ data: { plagiarism_report:JSON.stringify(changelist[0].plagiarism_report),createdId: result.id, createdRevId: result.rev }, statusCode: 201 });
-                                        console.log(result);
+                                       let ResultData={
+                                            data: { plagiarism_report:mainlist.plagiarism_report,createdId: result.id, createdRevId: result.rev }, statusCode: 201
+                                        }
+                                        console.log(ResultData);
+                                        resolve(ResultData);
+                                        
                                     }
                                 });
                             }
