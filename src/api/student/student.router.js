@@ -51,7 +51,7 @@ studentRouter
             res.sendStatus(404)
         }
     })
-    .post ('/plagiarism/:email', async (req, res) => {
+    .get('/plagiarism/:email', async (req, res) => {
         try {
             const result = await studentController.getPlagiarism({ email: req.params.email, test_id : req.query.test_id })
             console.log(result);

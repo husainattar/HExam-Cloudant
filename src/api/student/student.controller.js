@@ -4,6 +4,7 @@ const {spawn} = require('child_process');
 const db=require('../../config/cloudantdb');
 const { uuid } = require('uuidv4');
 const { resolve } = require('path');
+const { connected } = require('process');
 
 //Function-For-PythonCalling
 
@@ -207,12 +208,14 @@ module.exports = {
     },
     getPlagiarism : async({email, test_id }) =>{
 
+        console.log("in-plagiarism")
+
         //write code to fetch the plagiarism report of student from his/her email and the the test id
         return new Promise((resolve,reject)=>{
             db.find({
                 'selector': {
                     'type':"report",
-                    'test_id':testId,
+                    'test_id':test_id,
                       }
                         }, (err, documents) => {
                             if (err) {
@@ -250,10 +253,12 @@ module.exports = {
                                         return data;
                                     }
                                  });
+
+
             
                                  changelist[0].plagiarism_report=Targetlist[0];
     
-                                 console.log(changelist[0]);
+                                 console.log(changelist);
             
                                  db.insert(changelist, (err, result) => {
                                     if (err) {
