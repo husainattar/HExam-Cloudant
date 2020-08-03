@@ -24,8 +24,8 @@ function pythonFunction (value,question){
         console.log(value);
         // let url =report.substring(report.indexOf("u")+1,report.indexOf(")")).replace("'",'');
         // let percent=report.substring(1,report.indexOf(","));
-        let url = report[0];
-        let percent = report[1];
+        let url = report[1];
+        let percent = report[0];
         var plagiarismReport={
             "answer":value,
             "question":question,
